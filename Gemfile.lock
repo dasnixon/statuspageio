@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    statuspageio (0.1.0)
+      httparty (~> 0.15.6)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
+    multi_xml (0.6.0)
+    rake (10.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.16)
+  rake (~> 10.0)
+  statuspageio!
+
+BUNDLED WITH
+   1.16.0
