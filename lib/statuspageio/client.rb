@@ -16,4 +16,5 @@ module Statuspageio
         send("#{key}=", options[key])
       end
     end
+  end
 end
