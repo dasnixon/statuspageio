@@ -1,8 +1,6 @@
 # Statuspageio
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/statuspageio`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby gem for the [Statuspage REST API](https://developer.statuspage.io).
 
 ## Installation
 
@@ -22,7 +20,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+##### In plain Ruby
+
+```ruby
+client = Statuspageio::Client.new(api_key: '<your_api_key>', page_id: '<your_page_id>')
+client.incidents(:all) # get a list of all your incidents
+```
+
+##### In Rails you can configure using an initializer
+
+`config/intializer/statuspage.rb`
+
+```ruby
+Statuspageio.configure do |config|
+  config.api_key = ENV['STATUSPAGE_API_KEY']
+  config.page_id = ENV['STATUSPAGE_PAGE_ID']
+end
+```
 
 ## Development
 
