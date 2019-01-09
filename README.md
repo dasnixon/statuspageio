@@ -29,7 +29,7 @@ client.incidents(:all) # get a list of all your incidents
 
 ##### In Rails you can configure using an initializer
 
-`config/intializer/statuspage.rb`
+`config/intializers/statuspage.rb`
 
 ```ruby
 Statuspageio.configure do |config|
