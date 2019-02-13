@@ -13,6 +13,11 @@ module Statuspageio
           get("/pages/#{self.page_id}/incidents")
         end
       end
+
+      def search_incidents(q)
+        return incidents if q.nil? || q.empty?
+        get("/pages/#{self.page_id}/incidents", { q: q })
+      end
     end
   end
 end

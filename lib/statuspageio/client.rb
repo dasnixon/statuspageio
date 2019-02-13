@@ -38,8 +38,8 @@ module Statuspageio
       self.class.handle_response(self.class.delete("#{path}.json", headers: headers))
     end
 
-    def get(path)
-      self.class.handle_response(self.class.get("#{path}.json", headers: headers))
+    def get(path, query = {})
+      self.class.handle_response(self.class.get("#{path}.json", query: query, headers: headers))
     end
 
     def post(path, data = {})
