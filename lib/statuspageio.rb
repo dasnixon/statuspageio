@@ -3,15 +3,12 @@ require 'statuspageio/configuration'
 
 module Statuspageio
   extend Configuration
+
   class << self
-    # Alias for Statuspageio::Client.new
-    #
-    # @return [Statuspageio::Client]
     def new(options = {})
       Statuspageio::Client.new(options)
     end
 
-    # Delegate to Gems::Client
     def method_missing(method, *args, &block)
       return super unless new.respond_to?(method)
       new.send(method, *args, &block)

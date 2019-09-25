@@ -5,10 +5,13 @@ require 'statuspageio/response_error'
 module Statuspageio
   class Client
     include HTTParty
-    base_uri 'api.statuspage.io/v1'
+    base_uri 'https://api.statuspage.io/v1'
 
     require 'statuspageio/client/incident'
+    require 'statuspageio/client/subscriber'
+
     include Statuspageio::Client::Incident
+    include Statuspageio::Client::Subscriber
 
     attr_accessor(*Configuration::VALID_OPTIONS_KEYS)
 
@@ -31,7 +34,7 @@ module Statuspageio
       if response.class == HTTParty::Response
         raise ResponseError, response
       end
-      raise StandardError, "Unknown error"
+      raise StandardError, 'Unknown error'
     end
 
     def delete(path)
@@ -43,17 +46,20 @@ module Statuspageio
     end
 
     def post(path, data = {})
-      self.class.handle_response(self.class.post("#{path}.json", data, headers: headers))
+      self.class.handle_response(self.class.post("#{path}.json", body: data.to_json, headers: headers))
     end
 
     def put(path, data = {})
-      self.class.handle_response(self.class.put("#{path}.json", data, headers: headers))
+      self.class.handle_response(self.class.put("#{path}.json", body: data.to_json, headers: headers))
     end
 
     private
 
     def headers
-      { 'Authorization' => "OAuth #{self.api_key}" }
+      {
+        'Authorization' => "OAuth #{self.api_key}",
+        'Content-Type'  => 'application/json'
+      }
     end
   end
 end

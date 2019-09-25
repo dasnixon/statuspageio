@@ -1,11 +1,8 @@
 module Statuspageio
-  # Error raised on a bad response
   class ResponseError < StandardError
 
     attr_reader :response, :code, :errors
 
-    # @param [HTTParty::Response] res
-    # @return [CloudApp::ResponseError]
     def initialize(res)
       @response = res.response
       @code     = res.code
@@ -16,9 +13,6 @@ module Statuspageio
       end
     end
 
-    # Returns error code and message
-    #
-    # @return [String]
     def to_s
       "#{code.to_s} #{response.msg}".strip
     end
