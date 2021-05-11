@@ -1,24 +1,28 @@
 PATH
   remote: .
   specs:
-    statuspageio (0.1.0)
-      httparty (~> 0.15.6)
+    statuspageio (0.1.5)
+      httparty (~> 0.17)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    httparty (0.15.6)
+    httparty (0.18.1)
+      mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2021.0225)
     multi_xml (0.6.0)
-    rake (10.5.0)
+    rake (12.3.3)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-19
 
 DEPENDENCIES
-  bundler (~> 1.16)
-  rake (~> 10.0)
+  bundler (~> 2.1, >= 2.1.0)
+  rake (~> 12.3, >= 12.3.3)
   statuspageio!
 
 BUNDLED WITH
-   1.16.0
+   2.2.17
