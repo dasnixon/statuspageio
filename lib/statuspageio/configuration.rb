@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Statuspageio
   module Configuration
     # An array of valid keys in the options hash when configuring a {Gems::Client}
-    VALID_OPTIONS_KEYS = [
-      :api_key,
-      :page_id
+    VALID_OPTIONS_KEYS = %i[
+      api_key
+      page_id
     ].freeze
 
     attr_accessor(*VALID_OPTIONS_KEYS)

@@ -184,4 +184,92 @@ describe Statuspageio::Client::Incident do
       expect(client.delete_incident(incident_id)).to_not be_empty
     end
   end
+
+  describe '#create_incident' do
+    let(:body) do
+      load_fixture('incident')
+    end
+
+    let(:request_url) do
+      "https://api.statuspage.io/v1/pages/#{page_id}/incidents.json"
+    end
+
+    let(:options) do
+      { name: 'Incident 1' }
+    end
+
+    context 'with valid options' do
+      before do
+        stub_request(:post, request_url).
+          with(body: options.to_json).
+          to_return(body: body, status: 201)
+      end
+
+      it 'creates an incident' do
+        expect(client.create_incident(options)).to_not be_empty
+      end
+    end
+
+    context 'with invalid options' do
+      before do
+        stub_request(:post, request_url).
+          with(body: options.to_json).
+          to_return(body: body, status: 201)
+      end
+
+      it 'ignores them' do
+        expect(client.create_incident(options.merge(dog: 'cat'))).to_not be_empty
+      end
+    end
+
+    context 'with string options' do
+      let(:options) do
+        { 'name' => 'Incident 2' }
+      end
+
+      before do
+        stub_request(:post, request_url).
+          with(body: { name: 'Incident 2' }.to_json).
+          to_return(body: body, status: 201)
+      end
+
+      it 'handles string options and creates incident' do
+        expect(client.create_incident(options)).to_not be_empty
+      end
+    end
+
+    context 'without a valid name' do
+      it 'raises an ArgumentError' do
+        expect { client.create_incident({ bad: 'options' }) }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe '#update_incident' do
+    let(:body) do
+      load_fixture('incident')
+    end
+
+    let(:incident_id) { '2220srj7t3zp' }
+
+    let(:request_url) do
+      "https://api.statuspage.io/v1/pages/#{page_id}/incidents/#{incident_id}.json"
+    end
+
+    let(:options) do
+      { name: 'Incident 1' }
+    end
+
+    context 'with valid options' do
+      before do
+        stub_request(:put, request_url).
+          with(body: options.to_json).
+          to_return(body: body, status: 200)
+      end
+
+      it 'updates an incident' do
+        expect(client.update_incident(incident_id, options)).to_not be_empty
+      end
+    end
+  end
 end

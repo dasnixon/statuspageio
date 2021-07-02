@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'httparty'
 require 'statuspageio/configuration'
 require 'statuspageio/response_error'
@@ -31,9 +33,8 @@ module Statuspageio
     end
 
     def self.bad_response(response)
-      if response.class == HTTParty::Response
-        raise ResponseError, response
-      end
+      raise ResponseError, response if response.instance_of?(HTTParty::Response)
+
       raise StandardError, 'Unknown error'
     end
 
@@ -55,10 +56,18 @@ module Statuspageio
 
     private
 
+    def symbolize_keys(opts)
+      opts.transform_keys do |key|
+        key.to_sym
+      rescue StandardError
+        key
+      end
+    end
+
     def headers
       {
-        'Authorization' => "OAuth #{self.api_key}",
-        'Content-Type'  => 'application/json'
+        'Authorization' => "OAuth #{api_key}",
+        'Content-Type' => 'application/json'
       }
     end
   end
