@@ -2,6 +2,8 @@
 
 Ruby gem for the [Statuspage REST API](https://developer.statuspage.io).
 
+[![Build Status](https://travis-ci.com/dasnixon/statuspageio.svg?branch=master)](https://travis-ci.com/dasnixon/statuspageio)
+
 ## Installation
 
 Add this line to your application's Gemfile:
