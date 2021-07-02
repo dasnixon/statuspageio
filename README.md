@@ -1,8 +1,9 @@
+[![Build Status](https://travis-ci.com/dasnixon/statuspageio.svg?branch=master)](https://travis-ci.com/dasnixon/statuspageio)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bc9c8c9d3bcad2438f10/maintainability)](https://codeclimate.com/github/dasnixon/statuspageio/maintainability)
+
 # Statuspageio
 
 Ruby gem for the [Statuspage REST API](https://developer.statuspage.io).
-
-[![Build Status](https://travis-ci.com/dasnixon/statuspageio.svg?branch=master)](https://travis-ci.com/dasnixon/statuspageio)
 
 ## Installation
 
