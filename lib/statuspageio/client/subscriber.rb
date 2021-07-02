@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# https://developer.statuspage.io/#tag/subscribers
 module Statuspageio
   class Client
     module Subscriber
@@ -28,7 +29,7 @@ module Statuspageio
       end
 
       def create_subscriber(options)
-        create_options = options.dup.slice(*SUBSCRIBER_OPTIONS)
+        create_options = symbolize_keys(options).slice(*SUBSCRIBER_OPTIONS)
 
         if valid_for_subscribing?(create_options)
           post("/pages/#{page_id}/subscribers", { subscriber: create_options })

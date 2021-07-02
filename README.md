@@ -24,7 +24,34 @@ Or install it yourself as:
 
 ```ruby
 client = Statuspageio::Client.new(api_key: '<your_api_key>', page_id: '<your_page_id>')
-client.incidents(:all) # get a list of all your incidents
+
+# get a list of all your incidents
+client.incidents
+
+# get incidents scoped by their status
+client.incidents(:active_maintenance)
+client.incidents(:scheduled)
+client.incidents(:unresolved)
+client.incidents(:upcoming)
+
+# pagination support
+client.incidents(limit: 20, page: 2)
+
+# query support
+client.incidents(query: 'AWS is down')
+
+# fetch an incident
+client.incident(<incident_id>)
+
+# create an incident (see [docs](https://developer.statuspage.io) for payload)
+client.create_incident(<incident payload>)
+
+# update an incident
+client.update_incident(<incident_id>, payload)
+
+# delete an incident
+client.delete_incident(<incident_id>)
+
 ```
 
 ##### In Rails you can configure using an initializer
