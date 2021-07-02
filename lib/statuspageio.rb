@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'statuspageio/client'
 require 'statuspageio/configuration'
 
@@ -11,6 +13,7 @@ module Statuspageio
 
     def method_missing(method, *args, &block)
       return super unless new.respond_to?(method)
+
       new.send(method, *args, &block)
     end
 

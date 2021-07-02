@@ -1,0 +1,43 @@
+# This explicitly enables all new cops
+# We should just have to adjust where we deviate from the defaults
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Metrics/BlockLength:
+  Exclude:
+    - '*.gemspec'
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - 'test/**/*.rb'
+
+Layout/LineLength:
+  Max: 100
+
+Style/Documentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  AllowAliasSyntax: true
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  AllowComments: true
+  Enabled: true
+
+Lint/RaiseException:
+  AllowedImplicitNamespaces: true
+  Enabled: true
+
+Style/ExponentialNotation:
+  EnforcedStyle: scientific
+  Enabled: true
+
+Style/HashAsLastArrayItem:
+  Enabled: true
+  EnforcedStyle: braces
