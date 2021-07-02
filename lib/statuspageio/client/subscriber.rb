@@ -4,6 +4,8 @@
 module Statuspageio
   class Client
     module Subscriber
+      extend Gem::Deprecate
+
       SUBSCRIBER_OPTIONS = %i[
         component_ids
         email
@@ -14,19 +16,21 @@ module Statuspageio
         skip_confirmation_notification
       ].freeze
 
-      def subscribers(incident_id: nil)
+      def subscribers(incident_id: nil, query: nil)
+        query_opts = { q: query }.compact
+
         if incident_id
-          get("/pages/#{page_id}/incidents/#{incident_id}/subscribers")
+          get("/pages/#{page_id}/incidents/#{incident_id}/subscribers", query_opts)
         else
-          get("/pages/#{page_id}/subscribers")
+          get("/pages/#{page_id}/subscribers", query_opts)
         end
       end
 
-      def search_subscribers(query_str)
-        return subscribers if query_str.nil? || query_str.empty?
-
-        get("/pages/#{page_id}/subscribers", { q: query_str })
+      def search_subscribers(query)
+        subscribers(query: query)
       end
+
+      deprecate :search_subscribers, :subscribers, 2021, 7
 
       def create_subscriber(options)
         create_options = symbolize_keys(options).slice(*SUBSCRIBER_OPTIONS)

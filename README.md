@@ -20,11 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-##### In plain Ruby
+#### Initializing a client
 
 ```ruby
 client = Statuspageio::Client.new(api_key: '<your_api_key>', page_id: '<your_page_id>')
 
+client.incidents
+```
+
+#### Incidents
+
+```ruby
 # get a list of all your incidents
 client.incidents
 
@@ -43,7 +49,7 @@ client.incidents(query: 'AWS is down')
 # fetch an incident
 client.incident(<incident_id>)
 
-# create an incident (see [docs](https://developer.statuspage.io) for payload)
+# create an incident (see https://developer.statuspage.io for payload options)
 client.create_incident(<incident payload>)
 
 # update an incident
@@ -54,7 +60,30 @@ client.delete_incident(<incident_id>)
 
 ```
 
-##### In Rails you can configure using an initializer
+#### Subscribers
+
+```ruby
+# get a list of all your subscribers
+client.subscribers
+
+# get a list of all your subscribers per incident
+client.subscribers(incident_id: <incident_id>)
+
+# query support
+client.subscribers(query: 'Albert Einstein')
+
+# create a subscriber (see https://developer.statuspage.io for payload options)
+client.create_subscriber(<subscriber payload>)
+
+# delete a subscriber
+client.delete_subscriber(<subscriber_id>)
+
+# delete a subscriber for an incident
+client.delete_subscriber(<subscriber_id>, incident_id: <incident_id>)
+
+```
+
+#### In Rails you can configure using an initializer
 
 `config/intializers/statuspage.rb`
 
