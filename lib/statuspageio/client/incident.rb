@@ -67,13 +67,13 @@ module Statuspageio
 
         raise ArgumentError, 'name is required' if create_opts[:name].nil? || create_opts[:name].empty?
 
-        post("/pages/#{page_id}/incidents", create_opts)
+        post("/pages/#{page_id}/incidents", incident: create_opts)
       end
 
       def update_incident(incident_id, opts = {})
         update_opts = allowlist_opts(symbolize_keys(opts))
 
-        put("/pages/#{page_id}/incidents/#{incident_id}", update_opts)
+        put("/pages/#{page_id}/incidents/#{incident_id}", incident: update_opts)
       end
 
       private

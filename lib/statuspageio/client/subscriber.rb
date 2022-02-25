@@ -36,7 +36,7 @@ module Statuspageio
         create_options = symbolize_keys(options).slice(*SUBSCRIBER_OPTIONS)
 
         if valid_for_subscribing?(create_options)
-          post("/pages/#{page_id}/subscribers", { subscriber: create_options })
+          post("/pages/#{page_id}/subscribers", subscriber: create_options)
         else
           raise ArgumentError, 'An email address or phone number with the two digit country code '\
                                'is required'
