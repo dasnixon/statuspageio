@@ -246,10 +246,13 @@ describe Statuspageio::Client::Incident do
 
     context 'when error is returned by server' do
       let(:body) { { error: 'incident is missing, incident[name] is missing' }.to_json }
+      let(:options) do
+        { 'name' => 'Incident 2' }
+      end
 
       before do
         stub_request(:post, request_url).
-          with(body: options.to_json).
+          with(body: { incident: { name: 'Incident 2' } }.to_json).
           to_return(
             headers: { 'Content-Type' => 'application/json' },
             status: [400, 'Bad Request'],
@@ -258,7 +261,7 @@ describe Statuspageio::Client::Incident do
       end
 
       it 'raises an error' do
-        expect { client.create_incident(options.merge(dog: 'cat')) }
+        expect { client.create_incident(options) }
           .to raise_error do |error|
             expect(error.class).to eq(Statuspageio::ResponseError)
             expect(error.to_s).to eq('400 Bad Request error: incident is missing, incident[name] is missing')
