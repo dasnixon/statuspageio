@@ -201,7 +201,7 @@ describe Statuspageio::Client::Incident do
     context 'with valid options' do
       before do
         stub_request(:post, request_url).
-          with(body: options.to_json).
+          with(body: { incident: options }.to_json).
           to_return(body: body, status: 201)
       end
 
@@ -213,7 +213,7 @@ describe Statuspageio::Client::Incident do
     context 'with invalid options' do
       before do
         stub_request(:post, request_url).
-          with(body: options.to_json).
+          with(body: { incident: options }.to_json).
           to_return(body: body, status: 201)
       end
 
@@ -229,7 +229,7 @@ describe Statuspageio::Client::Incident do
 
       before do
         stub_request(:post, request_url).
-          with(body: { name: 'Incident 2' }.to_json).
+          with(body: { incident: { name: 'Incident 2' } }.to_json).
           to_return(body: body, status: 201)
       end
 
@@ -285,7 +285,7 @@ describe Statuspageio::Client::Incident do
     context 'with valid options' do
       before do
         stub_request(:put, request_url).
-          with(body: options.to_json).
+          with(body: { incident: options }.to_json).
           to_return(body: body, status: 200)
       end
 
