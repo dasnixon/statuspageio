@@ -2,7 +2,7 @@
 
 module Statuspageio
   class ResponseError < StandardError
-    attr_reader :response, :code, :errors
+    attr_accessor :response, :code, :errors
 
     def initialize(res)
       self.response = res.response
@@ -15,7 +15,7 @@ module Statuspageio
     end
 
     def to_s
-      "#{code} #{response.msg}".strip
+      [code.to_s, response.msg, inlined_errors].compact.map(&:strip).join(' ')
     end
 
     private
@@ -31,6 +31,10 @@ module Statuspageio
       else
         []
       end
+    end
+
+    def inlined_errors
+      errors&.join(', ')
     end
   end
 end
